@@ -5,9 +5,11 @@
     <p>Using this Official Developer Certification Program you will learn important development topics and have the
     chance to become certified in each topic after testing.</p>
 
-    <p>The following is a list of topics available for certification</p>
+    <p>The following is a list of lessons available for certification</p>
 
-    {% for topic in topics %}
-        {{ topic }}
-    {% endfor %}
+    <ul>
+        {% for lesson in lessons %}
+            <li><a href="{% url 'lesson' topic=lesson.topic.name %}">{{ lesson.topic.name }}</a></li>
+        {% endfor %}
+    </ul>
 {% endblock %}
