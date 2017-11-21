@@ -24,7 +24,7 @@ class CodeMirror(forms.Textarea):
 
         return """%s
 <script type="text/javascript">
-    CodeMirror.fromTextArea(
+    var code_editor = CodeMirror.fromTextArea(
         document.getElementById('%s'), %s
     );
 </script>
