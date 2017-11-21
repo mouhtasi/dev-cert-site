@@ -1,7 +1,28 @@
 {% extends 'fizzbuzz/base.html' %}
 
 {% block content %}
-<p>A bunch of words about {{ test.topic.name }}.</p>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'codemirror/css/codemirror.css' %}"/>
+    <script type="text/javascript" src="{% static 'codemirror/js/codemirror.js' %}"></script>
+    <script type="text/javascript" src="{% static 'codemirror/js/python.js' %}"></script>
+    <script type="text/javascript" src="{% static 'codemirror/js/form_input.js' %}"></script>
 
-<p>{{ test.content }}</p>
+    <p>A bunch of words about {{ test.topic.name }}.</p>
+
+    <p>{{ test.content }}</p>
+
+    <div style="max-width: 50%"> <!-- make this more elegant in a css -->
+        <form action="{% url 'test' topic=test.topic %}" method="post" id="codemirror-form">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+    {% if passed is True %}
+        <p>YAY!</p>
+    {% elif passed is False %}
+        <p>:(</p>
+    {% endif %}
+
 {% endblock %}
