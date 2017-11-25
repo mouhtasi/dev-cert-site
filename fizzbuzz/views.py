@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
 from .models import Lesson, Topic, Test
 from .forms import PythonCodeInput
+from .python_tests import TestEnclosure
 
 
 def index(request):
@@ -16,17 +16,41 @@ def lesson(request, topic):
 
 
 def test(request, topic):
+    """
+
+    :param request:
+    :param topic:
+    :type topic: str
+    :return:
+    """
     passed = None
     topic_id = Topic.objects.filter(name=topic)
     test = get_object_or_404(Test, topic=topic_id)
+    result = None
 
     if request.method == 'POST':
+        # make a session so we can keep user's work isolated
+        if not request.session.get('has_session'):
+            request.session['has_session'] = True
+
         form = PythonCodeInput(request.POST)
         if form.is_valid():
+            # get a session key to keep the script files unique between users
+            session_key = request.session.session_key
+
+            # get and write the user's code to a file so another script can later run it
+            input_code = form.cleaned_data['code_text']
+            with open('/home/nap/fizzbuzzcert/fizzbuzz/python_tests/scratch{}.py'.format(session_key),
+                      mode='w') as file:
+                file.write(input_code)
+
+            topic_method = getattr(TestEnclosure.SandboxedPython, topic.lower())
+            topic_method(session_key)
+
             # run code and test
             # for now assume pass
             passed = True
     else:
         form = PythonCodeInput()
 
-    return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'passed': passed})
+    return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'passed': passed, 'result': result})
