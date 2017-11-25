@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Lesson, Topic, Test
 from .forms import PythonCodeInput
 from .python_tests import TestEnclosure
+import os
 
 
 def index(request):
@@ -40,12 +41,13 @@ def test(request, topic):
 
             # get and write the user's code to a file so another script can later run it
             input_code = form.cleaned_data['code_text']
-            with open('/home/nap/fizzbuzzcert/fizzbuzz/python_tests/scratch{}.py'.format(session_key),
-                      mode='w') as file:
+            filename = '/home/nap/fizzbuzzcert/fizzbuzz/python_tests/scratch{}.py'.format(session_key)
+            with open(filename, mode='w') as file:
                 file.write(input_code)
 
             topic_method = getattr(TestEnclosure.SandboxedPython, topic.lower())
             topic_method(session_key)
+            os.remove(filename)
 
             # run code and test
             # for now assume pass
