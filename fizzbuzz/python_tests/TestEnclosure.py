@@ -16,18 +16,33 @@ class SandboxedPython:
             correct = False
         else:
             returned = str(returned.stdout)
-            result, correct = returned.lstrip('b').strip("'").split('separator')
+            result, correct = returned.lstrip('b').strip("'\"").split('separator')
 
         return result, correct == 'True'
 
     @staticmethod
     def fizzbuzz(modulename):
-        expected_result = 'hi'  # giving only print('hi') as test input
         SolutionClass = SandboxedPython.import_scratch_module(modulename)
         result = SolutionClass.fizzbuzz()
-        correct = result == expected_result
+        expected = SandboxedPython.fizzbuzz_test_1()
+
+        correct = result == expected
 
         return result, correct
+
+    @staticmethod
+    def fizzbuzz_test_1():
+        l = []
+        for i in range(1, 101):
+            if i % 15 == 0:
+                l.append('FizzBuzz')
+            elif i % 3 == 0:
+                l.append('Fizz')
+            elif i % 5 == 0:
+                l.append('Buzz')
+            else:
+                l.append(i)
+        return l
 
     @staticmethod
     def import_scratch_module(modulename):

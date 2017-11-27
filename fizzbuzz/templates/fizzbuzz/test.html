@@ -7,7 +7,7 @@
     <script type="text/javascript" src="{% static 'codemirror/js/python.js' %}"></script>
     <script type="text/javascript" src="{% static 'codemirror/js/form_input.js' %}"></script>
 
-    <p>A bunch of words about {{ test.topic.name }}.</p>
+    <p>{{ test.topic.name }} test.</p>
 
     <p>{{ test.content }}</p>
 
@@ -22,9 +22,9 @@
     {{ result }}
 
     {% if correct is True %}
-        <p>YAY!</p>
+        <p>Pass!</p>
     {% elif correct is False %}
-        <p>:(</p>
+        <p>Fail</p>
     {% endif %}
 
 {% endblock %}
