@@ -45,8 +45,8 @@ def test(request, topic):
             with open(filename, mode='w') as file:
                 file.write(input_code)
 
-            topic_method = getattr(TestEnclosure.SandboxedPython, topic.lower())
-            topic_method(session_key)
+            topic_method = getattr(TestEnclosure.SandboxedPython, topic.lower())  # run the method matching the topic
+            correct = topic_method(session_key)
             os.remove(filename)
 
             # run code and test
@@ -55,4 +55,4 @@ def test(request, topic):
     else:
         form = PythonCodeInput()
 
-    return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'passed': passed, 'result': result})
+    return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'passed': passed, 'correct': correct})
