@@ -28,6 +28,7 @@ def test(request, topic):
     topic_id = Topic.objects.filter(name=topic)
     test = get_object_or_404(Test, topic=topic_id)
     result = None
+    correct = None
 
     if request.method == 'POST':
         # make a session so we can keep user's work isolated
@@ -45,14 +46,12 @@ def test(request, topic):
             with open(filename, mode='w') as file:
                 file.write(input_code)
 
-            topic_method = getattr(TestEnclosure.SandboxedPython, topic.lower())  # run the method matching the topic
-            correct = topic_method(session_key)
+            scratch_module_name = 'scratch{}'.format(session_key)
+            result, correct = TestEnclosure.SandboxedPython.run_script_call_self(
+                scratch_module_name=scratch_module_name, test=topic.lower())
             os.remove(filename)
 
-            # run code and test
-            # for now assume pass
-            passed = True
     else:
         form = PythonCodeInput()
 
-    return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'passed': passed, 'correct': correct})
+    return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'result': result, 'correct': correct})
