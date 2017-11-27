@@ -45,6 +45,20 @@ class SandboxedPython:
         return l
 
     @staticmethod
+    def test(modulename):
+        SolutionClass = SandboxedPython.import_scratch_module(modulename)
+        result = SolutionClass.test()
+        expected = SandboxedPython.test_test_1()
+
+        correct = result == expected
+
+        return result, correct
+
+    @staticmethod
+    def test_test_1():
+        return 1
+
+    @staticmethod
     def import_scratch_module(modulename):
         scratch = import_module(modulename, 'Solution')
         return scratch.Solution
