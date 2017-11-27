@@ -76,6 +76,7 @@ WSGI_APPLICATION = 'fizzbuzzcert.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# TODO: Change and move auth to env var or other file
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

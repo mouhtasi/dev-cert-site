@@ -52,6 +52,9 @@ def test(request, topic):
             os.remove(filename)
 
     else:
-        form = PythonCodeInput()
+        code_text = """class Solution:
+    def {}():
+        """.format(topic.lower())
+        form = PythonCodeInput(initial={'code_text': code_text})
 
     return render(request, 'fizzbuzz/test.html', {'test': test, 'form': form, 'result': result, 'correct': correct})

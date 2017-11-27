@@ -9,7 +9,6 @@ class SandboxedPython:
     @staticmethod
     def run_script_call_self(scratch_module_name, test):
         python_binary = '/home/nap/.virtualenvs/sandbox/bin/python3.6'
-        print(path.realpath(__file__))
         returned = subprocess.run([python_binary, path.realpath(__file__), '--modulename', scratch_module_name,
                                    '--testname', test], timeout=10, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if returned.stderr:
