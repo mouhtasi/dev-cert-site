@@ -9,7 +9,7 @@
 
     <ul>
         {% for lesson in lessons %}
-            <li><a href="{% url 'lesson' topic=lesson.topic.name %}">{{ lesson.topic.name }}</a></li>
+            <li><a href="{% url 'lesson' topic_name=lesson.topic.name %}">{{ lesson.topic.name }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -12,19 +12,23 @@
     <p>{{ test.content }}</p>
 
     <div style="max-width: 50%"> <!-- make this more elegant in a css -->
-        <form action="{% url 'test' topic=test.topic %}" method="post" id="codemirror-form">
+        <form action="{% url 'test' topic_name=test.topic.name %}" method="post" id="codemirror-form">
             {% csrf_token %}
             {{ form }}
             <input type="submit" value="Submit" />
         </form>
     </div>
 
-    {{ result }}
-
     {% if correct is True %}
-        <p>Pass!</p>
+        <p>Test passed!</p>
+        {% if is_student is True %}
+            <p>Click here to get certificate.</p>
+        {% elif is_student is False %}
+            <p>You're not a registered student but you may still enter your name to receive a certificate for passing.</p>
+            <a href="{% url 'get_guest_certificate' topic_name=test.topic.name %}">Get certificate here!</a>
+        {% endif %}
     {% elif correct is False %}
-        <p>Fail</p>
+        <p>Test failed.</p>
     {% endif %}
 
 {% endblock %}

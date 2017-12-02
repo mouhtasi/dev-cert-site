@@ -28,4 +28,4 @@ class Test(models.Model):
 
 class Student(models.Model):
     user = models.OneToOneField(User)
-    tests_passed = models.ManyToManyField(Topic)
+    tests_passed = models.ManyToManyField(Topic, default=None, blank=True)

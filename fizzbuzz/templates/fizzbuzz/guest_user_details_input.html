@@ -1,0 +1,13 @@
+{% extends 'fizzbuzz/base.html' %}
+
+{% block content %}
+
+    <div style="max-width: 50%"> <!-- make this more elegant in a css -->
+        <form action="{% url 'certificate' topic_name=topic_name %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Get Certificate" />
+        </form>
+    </div>
+
+{% endblock %}
