@@ -15,13 +15,12 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z^4y$&p#^@##&$9*sr8(=f02=nnq%@k9n(+@37rn94o3=fpfy#'
-
+with open(os.path.join(BASE_DIR, 'SECRET_KEY')) as f:
+    SECRET_KEY = f.read().strip()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -76,16 +75,17 @@ WSGI_APPLICATION = 'fizzbuzzcert.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# TODO: Change and move auth to env var or other file
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fizzbuzzcert',
-        'USER': 'fizzbuzzcertuser',
-        'PASSWORD': 'uW5n6dQ',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+with open(os.path.join(BASE_DIR, 'DB_PASS')) as f:
+    password = f.read().strip()
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'fizzbuzzcert',
+            'USER': 'fizzbuzzcertuser',
+            'PASSWORD': password,
+            'HOST': 'localhost',
+            'PORT': '',
+        }
 }
 
 #AUTH_USER_MODEL = 'fizzbuzz.User'

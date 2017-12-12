@@ -2,3 +2,5 @@
 __pycache__/
 *.py[cod]
 fizzbuzzcert/static/
+SECRET_KEY
+DB_PASS
