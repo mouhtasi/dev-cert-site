@@ -15,8 +15,6 @@ The backend: Debian + Apparmor + virtualenv, will add more here soon.
 
 ## Deployment
 
-## Deployment
-
 ```
 $ python manage.py migrate
 $ python manage.py collectstatic
