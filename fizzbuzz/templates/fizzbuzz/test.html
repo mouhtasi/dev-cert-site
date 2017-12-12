@@ -1,7 +1,7 @@
 {% extends 'fizzbuzz/base.html' %}
 
-{% block title %}{% block page_title %}{{ test.topic.name }}{% endblock %}{% endblock %}
-{% block subtitle %}Test{% endblock %}
+{% block title %}{% block page_title %}Test{% endblock %}{% endblock %}
+{% block subtitle %}{{ test.topic.name }}{% endblock %}
 
 {% block content %}
     {% load static %}
@@ -16,7 +16,7 @@
         <form action="{% url 'test' topic_name=test.topic.name %}" method="post" id="codemirror-form">
             {% csrf_token %}
             {{ form }}
-            <input type="submit" value="Submit" />
+            <input class="pure-button" type="submit" value="Submit" />
         </form>
     </div>
 
@@ -26,7 +26,7 @@
             <p>Click here to get certificate.</p>
         {% elif is_student is False %}
             <p>You're not a registered student but you may still enter your name to receive a certificate for passing.</p>
-            <a href="{% url 'get_guest_certificate' topic_name=test.topic.name %}">Get certificate here!</a>
+            <a class="pure-button" href="{% url 'get_guest_certificate' topic_name=test.topic.name %}">Get certificate here!</a>
         {% endif %}
     {% elif correct is False %}
         <p>Test failed.</p>

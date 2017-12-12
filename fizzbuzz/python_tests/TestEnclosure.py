@@ -45,17 +45,17 @@ class SandboxedPython:
         return l
 
     @staticmethod
-    def test(modulename):
+    def sampletopic(modulename):
         SolutionClass = SandboxedPython.import_scratch_module(modulename)
         result = SolutionClass.test()
-        expected = SandboxedPython.test_test_1()
+        expected = SandboxedPython.sampletopic_test_1()
 
         correct = result == expected
 
         return result, correct
 
     @staticmethod
-    def test_test_1():
+    def sampletopic_test_1():
         return 1
 
     @staticmethod

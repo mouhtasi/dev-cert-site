@@ -85,8 +85,9 @@ def certificate(request, topic_name):
         response['Content-Disposition'] = 'filename="{}_certificate.pdf"'.format(topic_name)
         pdf = canvas.Canvas(response)
         pdf.setPageSize(landscape(letter))
-        pdf.drawString(200, 500, '{} has been certified by this site to have passed the test for {}'.format(full_name,
+        pdf.drawString(180, 500, '{} has been certified by this site to have passed the test for {}'.format(full_name,
                                                                                                             topic_name))
+        pdf.drawString(180, 400, 'Yay.')
         pdf.showPage()
         pdf.save()
         return response
