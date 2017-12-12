@@ -55,13 +55,13 @@ def test(request, topic_name):
             os.remove(filename)
 
             if correct:
-                if request.user.is_authenticated:
-                    is_student = True
-                    request.user.student.tests_passed = Topic(topic)
-                    request.user.save()
-                else:
-                    is_student = False
-                    request.session['tests_passed_topic_ids'] = topic.id
+                # if request.user.is_authenticated:
+                #     is_student = True
+                #     request.user.student.tests_passed = Topic(topic)
+                #     request.user.save()
+                # else:
+                is_student = False
+                request.session['tests_passed_topic_ids'] = topic.id
     else:
         code_text = test.default_code
         form = PythonCodeInput(initial={'code_text': code_text})

@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^fizzbuzzcert/', include('fizzbuzz.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^fizzbuzzcert/admin/', admin.site.urls),
     url(r'^', include('fizzbuzz.urls', namespace='fizzbuzz'))
 ]

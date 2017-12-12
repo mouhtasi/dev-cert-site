@@ -1,5 +1,8 @@
 {% extends 'fizzbuzz/base.html' %}
 
+{% block title %}{% block page_title %}Developer Certification{% endblock %}{% endblock %}
+{% block subtitle %}{% endblock %}
+
 {% block content %}
     <p>Welcome to the developer certification program!</p>
     <p>Using this Official Developer Certification Program you will learn important development topics and have the
@@ -7,9 +10,7 @@
 
     <p>The following is a list of lessons available for certification</p>
 
-    <ul>
-        {% for lesson in lessons %}
-            <li><a href="{% url 'lesson' topic_name=lesson.topic.name %}">{{ lesson.topic.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% for lesson in lessons %}
+        <h2 class="content-subhead"><a href="{% url 'lesson' topic_name=lesson.topic.name %}">{{ lesson.topic.name }}</a></h2>
+    {% endfor %}
 {% endblock %}

@@ -1,9 +1,11 @@
 {% extends 'fizzbuzz/base.html' %}
 
-{% block content %}
-<p>{{ lesson.topic.name }} lesson.</p>
+{% block title %}{% block page_title %}{{ lesson.topic.name }}{% endblock %}{% endblock %}
+{% block subtitle %}Developer Certification{% endblock %}
 
-<p>{{ lesson.content }}</p>
+{% block content %}
+
+<p>{{ lesson.content|safe }}</p>
 
 <p>Hey kid now that you're all smart like why not go do the test at
     <a href="{% url 'test' topic_name=lesson.topic.name %}">{{ lesson.topic.name }}</a></p>

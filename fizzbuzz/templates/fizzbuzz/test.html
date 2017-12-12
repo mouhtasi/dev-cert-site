@@ -1,5 +1,8 @@
 {% extends 'fizzbuzz/base.html' %}
 
+{% block title %}{% block page_title %}{{ test.topic.name }}{% endblock %}{% endblock %}
+{% block subtitle %}Test{% endblock %}
+
 {% block content %}
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'codemirror/css/codemirror.css' %}"/>
@@ -7,11 +10,9 @@
     <script type="text/javascript" src="{% static 'codemirror/js/python.js' %}"></script>
     <script type="text/javascript" src="{% static 'codemirror/js/form_input.js' %}"></script>
 
-    <p>{{ test.topic.name }} test.</p>
-
     <p>{{ test.content }}</p>
 
-    <div style="max-width: 50%"> <!-- make this more elegant in a css -->
+    <div>
         <form action="{% url 'test' topic_name=test.topic.name %}" method="post" id="codemirror-form">
             {% csrf_token %}
             {{ form }}
@@ -29,6 +30,7 @@
         {% endif %}
     {% elif correct is False %}
         <p>Test failed.</p>
+        {{ result }}
     {% endif %}
 
 {% endblock %}

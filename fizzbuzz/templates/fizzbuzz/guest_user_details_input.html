@@ -1,13 +1,15 @@
 {% extends 'fizzbuzz/base.html' %}
 
-{% block content %}
+{% block title %}{% block page_title %}User Details{% endblock %}{% endblock %}
+{% block subtitle %}Please enter your name to be shown on the certificate{% endblock %}
 
-    <div style="max-width: 50%"> <!-- make this more elegant in a css -->
-        <form action="{% url 'certificate' topic_name=topic_name %}" method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Get Certificate" />
-        </form>
-    </div>
+{% block content %}
+<div class="pure-form">
+    <form action="{% url 'certificate' topic_name=topic_name %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="pure-button" type="submit" value="Get Certificate" />
+    </form>
+</div>
 
 {% endblock %}
